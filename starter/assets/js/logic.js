@@ -37,6 +37,20 @@ function  stopQuiz() {
   timeSpan.textContent = "0";
 
 }
+function chooseAnswer(event)
+{
+  event.preventDefault();
+  var element = event.target;
+  question = questions[currentQuestion];
+  if (element.id == question.correctAnswer)
+  {
+    console.log("correct");
+  }
+  else
+  {
+    console.log("wrong");
+  }
+}
 
 function displayNextQuestion()
 {
@@ -50,6 +64,7 @@ function displayNextQuestion()
     var button = document.createElement("button");
     button.textContent = index + ". " + element;
     button.id = element;
+    button.addEventListener("click", chooseAnswer);
     answerChoices.appendChild(button);
     index++;
    });
