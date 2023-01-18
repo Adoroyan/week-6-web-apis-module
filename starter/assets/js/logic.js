@@ -11,8 +11,7 @@ var questionTitle = document.getElementById("question-title");
 var answerChoices = document.getElementById("choices");
 
 
-// var secondsLeft = 75;
-var secondsLeft = 5;
+var secondsLeft = 75;
 var currentQuestion = 0;
 
 function setTime() {
@@ -45,15 +44,22 @@ function chooseAnswer(event)
   if (element.id == question.correctAnswer)
   {
     console.log("correct");
+    feedback.className = "hide";
   }
   else
   {
     console.log("wrong");
+    secondsLeft = secondsLeft - 5;
+    feedback.className = "start";
+    feedback.textContent = "Wrong!"
   }
+  currentQuestion++;
+  displayNextQuestion();
 }
 
 function displayNextQuestion()
 {
+  answerChoices.innerHTML="";
   question = questions[currentQuestion];
   answers = question.answers.lenght;
   questionTitle.textContent = question.text;
@@ -73,6 +79,7 @@ function displayNextQuestion()
 function startQuiz(event)
 {
   event.preventDefault();
+  timeSpan.textContent = secondsLeft;
   setTime();
   //hide startscreen
   if (startScreen.className === "start")
