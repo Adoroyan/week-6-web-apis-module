@@ -1,11 +1,15 @@
 // Selects element by class
 var timeSpan = document.getElementById("time");
 var startButton = document.getElementById("start");
-var questionTitle = document.getElementById("question-title");
-var answerChoices = document.getElementById("choices");
+
 var startScreen = document.getElementById("start-screen");
 var endScreen = document.getElementById("end-screen");
-var feedback = document.getElementById("end-screen");
+var feedback = document.getElementById("feedback");
+
+var questionDiv = document.getElementById("questions");
+var questionTitle = document.getElementById("question-title");
+var answerChoices = document.getElementById("choices");
+
 
 // var secondsLeft = 75;
 var secondsLeft = 5;
@@ -36,13 +40,35 @@ function  stopQuiz() {
 
 function displayNextQuestion()
 {
- 
+  question = questions[currentQuestion];
+  answers = question.answers.lenght;
+  questionTitle.textContent = question.text;
+   console.log(question.answers);
+   var index = 1;
+   question.answers.forEach (function(element){
+    console.log(element);
+    var button = document.createElement("button");
+    button.textContent = index + ". " + element;
+    button.id = element;
+    answerChoices.appendChild(button);
+    index++;
+   });
 }
 
 function startQuiz(event)
 {
   event.preventDefault();
   setTime();
+  //hide startscreen
+  if (startScreen.className === "start")
+  {
+    startScreen.className = "hide";
+  }
+  //show questions
+  if (questionDiv.className === "hide")
+  {
+    questionDiv.className = "start";
+  }
   displayNextQuestion();
 }
 
