@@ -1,6 +1,7 @@
 // Selects element by class
 var timeSpan = document.getElementById("time");
 var startButton = document.getElementById("start");
+var submitButton = document.getElementById("submit");
 
 var startScreen = document.getElementById("start-screen");
 var endScreen = document.getElementById("end-screen");
@@ -121,6 +122,17 @@ function startQuiz(event)
   displayNextQuestion();
 }
 
+function setHighScore(event)
+{
+  console.log("here");
+  event.preventDefault(); 
+  var result = [document.getElementById('initials').value, secondsLeft];
+  console.log(result);
+  console.log("---");
+  localStorage.setItem("score", JSON.stringify(result));
+  window.location.href = "highscores.html"
+  
+}
 
 startButton.addEventListener("click", startQuiz);
-var allQuestions = questions;
+submit.addEventListener("click", setHighScore);
